@@ -56,6 +56,17 @@
 
 (global-set-key (kbd "M-`") 'other-frame)
 
+(global-set-key (kbd "C-c C-/") '(lambda () (interactive) (insert "#_")))
+
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
+
+
+(recentf-mode 0)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LOOK & FEEL
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -148,6 +159,17 @@
 (use-package color-theme-sanityinc-tomorrow
   :config (progn
             (color-theme-sanityinc-tomorrow-night)))
+
+
+(use-package better-defaults)
+
+(setq default-directory "~/")
+
+(use-package flx-ido
+  :init (flx-ido-mode 1)
+  :config (setq ido-use-faces nil))
+
+
 
 
 
