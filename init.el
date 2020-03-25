@@ -58,11 +58,12 @@
 
 (global-set-key (kbd "C-c C-/") '(lambda () (interactive) (insert "#_")))
 
+(global-auto-revert-mode t)
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
-
+(global-set-key (kbd "C-c C-w") 'fixup-whitespace)
 
 (recentf-mode 0)
 
@@ -314,6 +315,8 @@
 
 (use-package magit
   ;; :pin "melpa-stable"
+  :config
+  (setq magit-save-repository-buffers 'dontask)
   :bind (("C-x g" . magit-status)
          ("C-c C-g" . magit-status)))
 
@@ -588,15 +591,29 @@
 ;;   (setq auto-save-default nil))
 
 (use-package pt
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package bm
   :ensure t
+  :defer t
   :config
   (bind-key [f7] 'bm-toggle)
   (bind-key [f8] 'bm-previous)
   (bind-key [f9] 'bm-next))
 
+(use-package projectile
+  :config
+  (progn)
+  (projectile-global-mode)
+  (setq projectile-mode-line '(:eval (format " Proj[%s]" (projectile-project-name))))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+
+(setq projectile-enable-caching t)
+(setq projectile-indexing-method 'native)
+
+(use-package ag)
 
 ;; OS X stuff
 (when (eq system-type 'darwin)
@@ -618,3 +635,5 @@
 
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
+;; end
