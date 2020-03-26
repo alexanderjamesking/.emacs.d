@@ -485,9 +485,11 @@
   :config
   (setq rust-format-on-save t)
   :init
-  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
 
-(use-package cargo
+
+(use-package racer
   :defer t)
 
 (use-package js-mode
