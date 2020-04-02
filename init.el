@@ -445,10 +445,15 @@
 
 (use-package cider
   :config
-  (setq nrepl-log-messages t)
+  (setq nrepl-log-messages t
+        cider-prompt-for-symbol nil
+        cider-repl-history-file "~/.emacs.d/cider-history"
+        cider-repl-display-help-banner nil)
   (add-hook 'cider-repl-mode-hook #'paredit-mode)
   (add-hook 'cider-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'eldoc-mode))
+  (add-hook 'cider-repl-mode-hook #'eldoc-mode)
+  (bind-keys :map cider-repl-mode-map
+             ("C-c M-o" . cider-repl-clear-buffer)))
 
 (use-package company-go
   :defer t
