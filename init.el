@@ -5,7 +5,7 @@
       auto-window-vscroll nil
       large-file-warning-threshold 100000000
       browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome"
+      browse-url-generic-program "/Applications/Firefox.app/Contents/MacOS/firefox"
       truncate-partial-width-windows nil
       backup-inhibited t
       make-backup-files nil
