@@ -5,7 +5,7 @@
       auto-window-vscroll nil
       large-file-warning-threshold 100000000
       browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "/Applications/Firefox.app/Contents/MacOS/firefox"
+      browse-url-generic-program "firefox"
       truncate-partial-width-windows nil
       backup-inhibited t
       make-backup-files nil
@@ -634,7 +634,10 @@
 
 
   (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier nil))
+  (setq mac-option-modifier nil)
+
+  (setq browse-url-generic-program
+        "/Applications/Firefox.app/Contents/MacOS/firefox"))
 ;; end OS X
 
 ;; config changes made through the customize UI will be stored here
