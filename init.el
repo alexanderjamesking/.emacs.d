@@ -196,10 +196,10 @@
 (use-package uniquify
   :init (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
 
-(use-package display-line-numbers
-  :if (version<= "26" emacs-version)
-  :hook ((prog-mode conf-mode) . display-line-numbers-mode)
-  :custom (display-line-numbers-width 3))
+;; (use-package display-line-numbers
+;;   :if (version<= "26" emacs-version)
+;;   :hook ((prog-mode conf-mode) . display-line-numbers-mode)
+;;   :custom (display-line-numbers-width 3))
 
 (use-package which-function-mode
   :defer t
