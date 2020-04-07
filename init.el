@@ -329,6 +329,9 @@
 ;;         yas-indent-line nil)
 ;;   :diminish yas-minor-mode)
 
+(use-package yasnippet
+  :ensure t)
+
 (use-package company-quickhelp)
 
 (use-package company
@@ -350,6 +353,9 @@
         ("C-p" . company-select-previous)
         ("C-d" . company-show-doc-buffer)
         ("<tab>" . company-complete-selection)))
+
+(use-package company-lsp
+  :ensure t)
 
 (use-package expand-region
   :ensure t
@@ -499,6 +505,32 @@
 
 (use-package racer
   :defer t)
+
+
+(use-package scala-mode
+  :ensure t
+  :mode "\\.s\\(cala\\|bt\\)$")
+
+(use-package sbt-mode
+  :ensure t
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map)
+   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+   (setq sbt:program-options '("-Dsbt.supershell=false")))
+
+(use-package lsp-mode
+  ;; Optional - enable lsp-mode automatically in scala files
+  :hook (scala-mode . lsp)
+  :ensure t
+  :config (setq lsp-prefer-flymake nil))
+
+(use-package lsp-ui)
 
 (use-package js-mode
   :defer t
