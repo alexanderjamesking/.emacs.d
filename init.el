@@ -109,7 +109,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; add the current line number to the mode bar
-(line-number-mode t)
+;;(line-number-mode nil)
 
 ;; add the current column number to the mode bar
 (column-number-mode t)
