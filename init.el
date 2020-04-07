@@ -154,13 +154,12 @@
 
 
 (custom-set-variables
-;; '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes (quote ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default))))
 
 (use-package color-theme-sanityinc-tomorrow
   :config (progn
             (color-theme-sanityinc-tomorrow-night)))
-
 
 (use-package better-defaults)
 
@@ -170,8 +169,18 @@
   :init (flx-ido-mode 1)
   :config (setq ido-use-faces nil))
 
+;; (use-package snazzy-theme
+;;   :ensure t
+;;   :init (load-theme 'snazzy t))
 
+;; (use-package solarized-theme
+;;   :ensure t
+;;   :init (load-theme 'solarized-dark t)
+;; ;;  :config (setq solarized-high-contrast-mode-line t)
+;;   )
 
+;; (use-package zenburn-theme
+;;   :ensure t)
 
 
 ;;(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono 15"))
@@ -323,17 +332,17 @@
   :bind (("C-x g" . magit-status)
          ("C-c C-g" . magit-status)))
 
-;; (use-package yasnippet
-;;   :diminish
-;;   :config
-;;   (use-package yasnippet-snippets)
-;;   (yas-global-mode t)
-;;   (setq yas-prompt-functions '(yas-dropdown-prompt yas-x-prompt)
-;;         yas-indent-line nil)
-;;   :diminish yas-minor-mode)
-
 (use-package yasnippet
-  :ensure t)
+  :diminish
+  :config
+  (use-package yasnippet-snippets)
+  (yas-global-mode t)
+  (setq yas-prompt-functions '(yas-dropdown-prompt yas-x-prompt)
+        yas-indent-line nil)
+  :diminish yas-minor-mode)
+
+;; (use-package yasnippet
+;;   :ensure t)
 
 (use-package company-quickhelp)
 
