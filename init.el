@@ -604,13 +604,13 @@
   :ensure t
   :defer t)
 
-(use-package bm
-  :ensure t
-  :defer t
-  :config
-  (bind-key [f7] 'bm-toggle)
-  (bind-key [f8] 'bm-previous)
-  (bind-key [f9] 'bm-next))
+;; (use-package bm
+;;   :ensure t
+;;   :defer t
+;;   :config
+;;   (bind-key [f7] 'bm-toggle)
+;;   (bind-key [f8] 'bm-previous)
+;;   (bind-key [f9] 'bm-next))
 
 (use-package projectile
   :config
