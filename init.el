@@ -183,6 +183,9 @@
 
 (set-face-attribute 'default nil :height 145)
 
+;;(set-frame-font "JetBrains Mono" nil t)
+(set-frame-font "Fira Code Retina" nil t)
+
 (setq ring-bell-function 'ignore)
 ;; (use-package paren
 ;;   :config
