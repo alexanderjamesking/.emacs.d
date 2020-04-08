@@ -19,3 +19,8 @@ smex-items
 places
 projectile-bookmarks.eld
 recentf
+custom.el
+.lsp-session-v1
+.mc-lists.el
+cider-history
+savehist
