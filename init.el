@@ -154,12 +154,22 @@
 
 
 (custom-set-variables
- '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
+;; '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
  '(custom-safe-themes (quote ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default))))
+
+
+;; doom-nord
+
 
 (use-package color-theme-sanityinc-tomorrow
   :config (progn
             (color-theme-sanityinc-tomorrow-night)))
+
+;; https://github.com/hlissner/emacs-doom-themes/tree/screenshots
+;; (use-package doom-themes
+;;   :ensure t
+;;   :config
+;;   (load-theme 'doom-nord t))
 
 (use-package better-defaults)
 
@@ -521,7 +531,9 @@
 
 (use-package scala-mode
   :ensure t
-  :mode "\\.s\\(cala\\|bt\\)$")
+  :mode "\\.s\\(cala\\|bt\\)$"
+  :init
+  (add-hook 'before-save-hook #'lsp-format-buffer))
 
 (use-package sbt-mode
   :ensure t
@@ -540,7 +552,10 @@
   ;; Optional - enable lsp-mode automatically in scala files
   :hook (scala-mode . lsp)
   :ensure t
-  :config (setq lsp-prefer-flymake nil))
+  :config
+  (setq lsp-prefer-flymake nil)
+;;  (setq lsp-keymap-prefix "C-c C-l")
+  )
 
 (use-package lsp-ui)
 
