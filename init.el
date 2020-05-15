@@ -674,27 +674,19 @@
 (use-package docker)
 (use-package dockerfile-mode)
 
-;; (use-package super-save
-;;   :ensure t
-;;   :init
-;;   (super-save-mode +1)
-;;   ;; save when switching buffers
-;;   (setq super-save-auto-save-when-idle t)
-;;   ;; turn off built in auto save
+(use-package super-save
+  :ensure t
+  :init
+  (super-save-mode +1)
+  ;; save when switching buffers
+  (setq super-save-auto-save-when-idle t)
+  ;; turn off built in auto save
 
-;;   (setq auto-save-default nil))
+  (setq auto-save-default nil))
 
 (use-package pt
   :ensure t
   :defer t)
-
-;; (use-package bm
-;;   :ensure t
-;;   :defer t
-;;   :config
-;;   (bind-key [f7] 'bm-toggle)
-;;   (bind-key [f8] 'bm-previous)
-;;   (bind-key [f9] 'bm-next))
 
 (use-package projectile
   :config
