@@ -9,9 +9,11 @@
       truncate-partial-width-windows nil
       backup-inhibited t
       make-backup-files nil
+      backup-directory-alist `(("." . "~/.saves"))
       auto-save-default nil
       auto-save-list-file-prefix nil
       save-place nil
+      create-lockfiles nil
       vc-follow-symlinks nil
       inhibit-startup-message t
       frame-inhibit-implied-resize t
