@@ -337,7 +337,7 @@
   :config
   (setq whitespace-style '(face trailing lines-tail)
         whitespace-global-modes '(not erc-mode)
-        whitespace-line-column 80))
+        whitespace-line-column 120))
 
 (use-package hl-todo
   :config
