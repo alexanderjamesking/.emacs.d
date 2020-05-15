@@ -642,8 +642,8 @@
   :bind (:map rst-mode-map
               ("C-M-h" . backward-kill-word)))
 
-;; (use-package restclient
-;;   :mode ("\\.http$". restclient-mode))
+(use-package restclient
+  :mode ("\\.http$". restclient-mode))
 
 ;; (use-package gist)
 
