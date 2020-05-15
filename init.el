@@ -181,6 +181,13 @@
   :init (flx-ido-mode 1)
   :config (setq ido-use-faces nil))
 
+(use-package find-file-in-project
+  :ensure t
+  :init
+  (add-to-list 'ffip-prune-patterns "*/target")
+  (add-to-list 'ffip-prune-patterns "*/.bloop")
+  (add-to-list 'ffip-prune-patterns "*/.metals"))
+
 ;; (use-package snazzy-theme
 ;;   :ensure t
 ;;   :init (load-theme 'snazzy t))
