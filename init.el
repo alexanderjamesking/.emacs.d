@@ -302,6 +302,22 @@
 ;;          ("M-X" . smex-major-mode-commands)
 ;;          ("C-c C-c M-x" . execute-extended-command)))
 
+
+
+(use-package neotree
+  :ensure t
+  :config
+  (setq neo-window-fixed-size nil)
+  (bind-key [f6] 'neotree-toggle))
+
+;; bookmarks
+(use-package bm
+  :ensure t
+  :config
+  (bind-key [f7] 'bm-toggle)
+  (bind-key [f8] 'bm-previous)
+  (bind-key [f9] 'bm-next))
+
 (use-package diminish
   :demand t)
 
