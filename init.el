@@ -331,6 +331,8 @@
 (use-package diminish
   :demand t)
 
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+
 (use-package whitespace
   :diminish
   :init
