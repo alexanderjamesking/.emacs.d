@@ -314,7 +314,10 @@
 (use-package neotree
   :ensure t
   :config
+  (setq neo-autorefresh nil)
   (setq neo-window-fixed-size nil)
+  (setq neo-smart-open t)
+  (setq projectile-switch-project-action 'netotree-projectile-action)
   (bind-key [f6] 'neotree-toggle))
 
 ;; bookmarks
