@@ -175,18 +175,18 @@
 
 (use-package better-defaults)
 
-(setq default-directory "~/")
-
 (use-package flx-ido
   :init (flx-ido-mode 1)
   :config (setq ido-use-faces nil))
 
 (use-package find-file-in-project
   :ensure t
+  :bind ("C-c C-f" . find-file-in-project)
   :init
-  (add-to-list 'ffip-prune-patterns "*/target")
-  (add-to-list 'ffip-prune-patterns "*/.bloop")
-  (add-to-list 'ffip-prune-patterns "*/.metals"))
+  (with-eval-after-load 'find-file-in-project
+    (add-to-list 'ffip-prune-patterns "*/target")
+    (add-to-list 'ffip-prune-patterns "*/.bloop")
+    (add-to-list 'ffip-prune-patterns "*/.metals")))
 
 ;; (use-package snazzy-theme
 ;;   :ensure t
