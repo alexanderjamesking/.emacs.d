@@ -128,3 +128,7 @@
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 (global-set-key (kbd "C-c C-w") 'fixup-whitespace)
+
+
+(use-package diminish
+  :demand t)

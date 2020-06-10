@@ -36,6 +36,9 @@
 
 ;; Enable sbt mode for executing sbt commands
 (use-package sbt-mode
+  :straight (sbt-mode :type git
+                      :host github
+                      :repo "alexanderjamesking/emacs-sbt-mode")
   :commands sbt-start sbt-command
   :config
   ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
@@ -71,4 +74,3 @@
 
 ;;   :config
 ;;   (message "ajk-scala config"))
-
