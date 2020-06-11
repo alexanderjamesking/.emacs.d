@@ -15,6 +15,7 @@
       auto-window-vscroll nil
       large-file-warning-threshold 100000000
       browse-url-browser-function 'browse-url-generic
+      ;; this is overridden in osx.el
       browse-url-generic-program "firefox"
       truncate-partial-width-windows nil
       backup-inhibited t

@@ -31,8 +31,8 @@
 (defvar modules-dir (expand-file-name "modules" user-emacs-directory))
 
 (defvar enabled-modules
-  '("osx"
-    "defaults"
+  '("defaults"
+    "osx"
     "look-and-feel"
     "navigation"
     "editing"
