@@ -25,6 +25,7 @@
         whitespace-line-column 120))
 
 
+;; highlight TODO comments
 (use-package hl-todo
   :config
   (setq hl-todo-highlight-punctuation ":")
@@ -104,14 +105,22 @@
          ("C-c C->" . mc/mark-all-like-this)))
 
 
+;; colourise colour names in buffers
 (use-package rainbow-mode
   :config
   (add-hook 'prog-mode-hook #'rainbow-mode))
 
+;; a “rainbow parentheses”-like mode which highlights parens, brackets, and braces according to their depth.
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
+
+;; an extension for flycheck to show errors under point in pos-tip popups
 (use-package flycheck-pos-tip)
 
-
+;; on the fly syntax checking
 (use-package flycheck
   :ensure t
   :bind (("C-c C-l" . flycheck-list-errors))
@@ -119,6 +128,7 @@
   (flycheck-pos-tip-mode)
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
+;; spell checker
 (use-package flyspell
   :config
   (setq ispell-program-name "aspell" ; use aspell instead of ispell
