@@ -63,11 +63,29 @@
 
     (sbt-test-wildcard region-text)))
 
-;; TODO - sort lines in a region
+;; TODO - sort imports in a region
+;; the following is taken from https://github.com/ensime/ensime-emacs/blob/34eb11dac3ec9d1c554c2e55bf056ece6983add7/ensime-refactor.el#L46
+;; it needs a bit of work but it'll do for a temporary solution
+(defun ensime-refactor-organize-java-imports ()
+  "Sort all import statements lexicographically and delete the duplicate imports."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (search-forward-regexp "^\\s-*package\\s-" nil t)
+    (goto-char (point-at-eol))
+    (let ((beg (point)) end)
+      ;; Advance past all imports
+      (while (looking-at "[\n\t ]*import\\s-\\(.+\\)\n")
+        (search-forward-regexp "import" nil t)
+        (goto-char (point-at-eol)))
+      (setq end (point))
+      (sort-lines nil beg end)
+      (delete-duplicate-lines beg end nil t))))
 
 (define-minor-mode ibex-mode
   "My custom Scala mode."
   :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-c C-o") 'ensime-refactor-organize-java-imports)
             (define-key map (kbd "C-c C-t C-t") 'run-single-test)
             (define-key map (kbd "C-c C-t C-f") 'run-tests-in-file)
             map))
