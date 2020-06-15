@@ -32,7 +32,12 @@
 
 ;; Enable scala-mode for highlighting, indentation and motion commands
 (use-package scala-mode
-  :mode "\\.s\\(cala\\|bt\\)$")
+  :mode "\\.s\\(cala\\|bt\\)$"
+  :init
+  (add-hook 'before-save-hook
+            (lambda ()
+              ;; TODO - check .scalafmt.conf exists in the project root before running this
+              (lsp-format-buffer))))
 
 ;; Enable sbt mode for executing sbt commands
 (use-package sbt-mode
