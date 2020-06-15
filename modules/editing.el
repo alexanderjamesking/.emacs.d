@@ -139,6 +139,12 @@
               ("C-;" . comment-or-uncomment-region)))
 
 
+(use-package drag-stuff
+  :ensure t
+  :hook prog-mode
+  :bind (("M-<up>" . drag-stuff-up)
+         ("M-<down>" . drag-stuff-down)))
+
 
 ;; disabled as it doesn't play nicely with metals which builds on save
 ;; (use-package super-save
