@@ -133,3 +133,6 @@
 
 (use-package diminish
   :demand t)
+
+;; colours in the buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
