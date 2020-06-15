@@ -138,7 +138,7 @@
   :bind (:map flyspell-mode-map
               ("C-;" . comment-or-uncomment-region)))
 
-
+;; to move lines up / down 
 (use-package drag-stuff
   :ensure t
   :hook prog-mode
