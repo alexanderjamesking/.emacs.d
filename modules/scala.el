@@ -1,17 +1,19 @@
 
-
 (use-package which-key
-  :ensure t)
+  :diminish
+  :ensure t
+  :init (which-key-mode))
 
 (use-package lsp-mode
   :ensure t
   ;; Optional - enable lsp-mode automatically in scala files
   :hook ((scala-mode . lsp)
-         (lsp-mode . lsp-lens-mode))
-  :config
-  (setq lsp-prefer-flymake nil
-        ;; this doesn't work 
-        lsp-keymap-prefix "C-c C-p")
+         (lsp-mode . lsp-lens-mode)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :config (setq lsp-prefer-flymake nil)
+  :init (progn (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
+;;               (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+               )
   ;; but this does: (I eval'd it inline, need to add it here properly)
 ;; (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
   )
