@@ -141,7 +141,8 @@
 ;; to move lines up / down 
 (use-package drag-stuff
   :ensure t
-  :hook prog-mode
+  :config
+  (add-hook 'prog-mode-hook 'drag-stuff-mode)
   :bind (("M-<up>" . drag-stuff-up)
          ("M-<down>" . drag-stuff-down)))
 
