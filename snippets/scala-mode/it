@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#Author : Alexander James King
+# name: it should
+# key: it
+# --
+it should "$1" in {
+  $2
+}
