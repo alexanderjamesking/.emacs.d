@@ -39,7 +39,7 @@
   (use-package yasnippet-snippets)
   (yas-global-mode t)
   (setq yas-prompt-functions '(yas-dropdown-prompt yas-x-prompt)
-        yas-indent-line nil)
+        yas-indent-line 'auto)
   :diminish yas-minor-mode)
 
 
