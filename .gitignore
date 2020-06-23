@@ -25,3 +25,4 @@ custom.el
 cider-history
 savehist
 eshell/
+.dap-breakpoints
