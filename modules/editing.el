@@ -141,6 +141,18 @@
   :bind (:map flyspell-mode-map
               ("C-;" . comment-or-uncomment-region)))
 
+;; from writing gnu emacs extensions book
+(defun other-window-backward (&optional n)
+  "Select Nth previous window."
+  ;; "p" means if there is a prefix argument, interpret it as a number,
+  ;; and if there is no prefix argument, interpret that as the number 1.
+  (interactive "P")
+  (other-window (- (prefix-numeric-value n))))
+
+(global-set-key (kbd "C-x C-n") 'other-window) ;; also "C-x o"
+(global-set-key (kbd "C-x C-p") 'other-window-backward)
+
+
 ;; to move lines up / down 
 (use-package drag-stuff
   :ensure t
