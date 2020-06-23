@@ -1,3 +1,6 @@
+;;
+;;; Code:
+;;
 
 (use-package js-mode
   :defer t
@@ -36,3 +39,9 @@
   :config
   (add-hook 'protobuf-mode-hook
             (lambda () (c-add-style "my-style" my-protobuf-style t))))
+
+(use-package graphviz-dot-mode
+  :ensure t
+  :config (setq graphviz-dot-indent-width 2))
+
+;;
