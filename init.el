@@ -38,6 +38,8 @@
     "editing"
     "text"
     "programming-utilities"
+    "org"
+    "elisp"
     ;; "clojure"
     ;; "go"
     ;; "rust"
