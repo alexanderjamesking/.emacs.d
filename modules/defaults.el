@@ -136,3 +136,16 @@
 
 ;; colours in the buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+
+
+(defun switch-to-minibuffer ()
+  "Switch to minibuffer window."
+  (interactive)
+  (if (active-minibuffer-window)
+      (select-window (active-minibuffer-window))
+    (error "Minibuffer is not active")))
+
+(global-set-key (kbd "C-c C-m") 'switch-to-minibuffer)
+
+;;
