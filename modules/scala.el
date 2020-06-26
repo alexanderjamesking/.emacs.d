@@ -1,6 +1,6 @@
 
 (use-package which-key
-  :diminish
+  :diminish which-key-mode
   :ensure t
   :init (which-key-mode))
 
@@ -21,13 +21,13 @@
 
 ;; https://github.com/emacs-lsp/lsp-metals
 
-;;(use-package lsp-metals :ensure t)
+(use-package lsp-metals :ensure t)
 
 ;; I couldn't get lsp-metals from melpa for some reason
-(straight-use-package
- '(lsp-metals :type git
-              :host github
-              :repo "emacs-lsp/lsp-metals"))
+;; (straight-use-package
+;;  '(lsp-metals :type git
+;;               :host github
+;;               :repo "emacs-lsp/lsp-metals"))
 
 
 

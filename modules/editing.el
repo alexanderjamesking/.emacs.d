@@ -6,6 +6,7 @@
 
 (use-package undo-tree
   :ensure t
+  :diminish global-undo-tree-mode
   :diminish undo-tree-mode
   :init (global-undo-tree-mode))
 
@@ -14,14 +15,15 @@
 
 
 (use-package whitespace
-  :diminish
+  :diminish global-whitespace-mode
   :init
-  (dolist (hook '(prog-mode-hook text-mode-hook))
-    (add-hook hook #'whitespace-mode))
+  (global-whitespace-mode 1)
+  ;; (dolist (hook '(prog-mode-hook text-mode-hook))
+  ;;   (add-hook hook #'whitespace-mode))
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   :config
   (setq whitespace-style '(face trailing lines-tail)
-        whitespace-global-modes '(not erc-mode)
+        whitespace-global-modes '(not erc-mode org-mode markdown-mode)
         whitespace-line-column 120))
 
 
@@ -34,7 +36,7 @@
 
 ;; TODO - I don't actually make use of this yet
 (use-package yasnippet
-  :diminish
+  :diminish yas-minor-mode
   :config
   (use-package yasnippet-snippets)
   (yas-global-mode t)
