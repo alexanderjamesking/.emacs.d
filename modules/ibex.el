@@ -41,7 +41,7 @@
   (let* ((file-name (s-replace (projectile-project-root) "" (buffer-file-name)))
          (dirs (s-split "/" file-name))
          (test-only (ibex-build-sbt-command dirs))
-         (command (concat test-only " *" (car (split-string (buffer-name) ".scala")) " -- -z \"" wildcard "\"")))
+         (command (concat test-only " *" (car (split-string (buffer-name) ".scala")) " -- -z \"" wildcard "\";")))
     (message command)
     (sbt:command command)))
 
