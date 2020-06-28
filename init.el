@@ -26,6 +26,8 @@
   (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'use-package)
+(setq straight-vc-git-default-protocol 'ssh)
+
 ;; end of straight config
 
 (defvar modules-dir (expand-file-name "modules" user-emacs-directory))
