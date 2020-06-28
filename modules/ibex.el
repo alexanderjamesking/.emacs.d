@@ -19,13 +19,29 @@
 (require 'sbt-mode)
 
 
+(defun ibex-build-test-only-command (dirs &optional acc prev)
+  "Loop through DIRS to find the path, ACC and PREV are used during recursion."
+  (if dirs
+      (let* ((part (car dirs))
+             (command-string (if (and acc prev)
+                                 acc
+                               (if (string= "src" part) ;; only for the first iteration
+                                   ""
+                                 (concat part "/")))))
+
+        (if (string= "scala" part)
+            (concat command-string prev ":testOnly")
+          (ibex-build-test-only-command (cdr dirs) command-string part)))
+    acc))
+
 (defun sbt-test-wildcard (wildcard)
   "Run `testOnly *BUFFER-NAME -- -z WILDCARD`."
   (interactive "sWildcard: ")
 
-  ;; TODO - need to look at current file name, project filename - work out if we're in a sub module (e.g. `it`)
-  ;; test:testOnly vs it:testOnly
-  (let* ((command (concat "testOnly *" (car (split-string (buffer-name) ".scala")) " -- -z \"" wildcard "\"")))
+  (let* ((file-name (s-replace (projectile-project-root) "" (buffer-file-name)))
+         (dirs (s-split "/" file-name))
+         (test-only (ibex-build-sbt-command dirs))
+         (command (concat test-only " *" (car (split-string (buffer-name) ".scala")) " -- -z \"" wildcard "\"")))
     (message command)
     (sbt:command command)))
 
