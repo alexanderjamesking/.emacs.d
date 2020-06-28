@@ -8,7 +8,7 @@
   :ensure t
   ;; Optional - enable lsp-mode automatically in scala files
   :hook ((scala-mode . lsp)
-         (lsp-mode . lsp-lens-mode)
+;;         (lsp-mode . lsp-lens-mode)
          (lsp-mode . lsp-enable-which-key-integration))
   :config (setq lsp-prefer-flymake nil)
   :init (progn (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
