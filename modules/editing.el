@@ -1,7 +1,7 @@
 
-(use-package elec-pair
-  :config
-  (electric-pair-mode +1))
+;; (use-package elec-pair
+;;   :config
+;;   (electric-pair-mode +1))
 
 
 (use-package undo-tree
@@ -91,6 +91,8 @@
   :ensure t
   :bind ("M-y" . browse-kill-ring))
 
+;; this is the emacs default
+;;(global-set-key (kbd "M-y") 'yank-pop)
 
 (use-package idle-highlight-mode
   :ensure t

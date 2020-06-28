@@ -130,12 +130,17 @@
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 (global-set-key (kbd "C-c C-w") 'fixup-whitespace)
 
+ ;; alternative to C-S-backspace which isn't practical with my keyboard layout
+(global-set-key (kbd "C-c d d") 'kill-whole-line)
+
+(setq kill-do-not-save-duplicates t)
 
 (use-package diminish
-  :demand t)
+  :ensure t)
 
 ;; colours in the buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
 
 
 
