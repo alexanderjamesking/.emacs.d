@@ -40,10 +40,10 @@
 
   (let* ((file-name (s-replace (projectile-project-root) "" (buffer-file-name)))
          (dirs (s-split "/" file-name))
-         (test-only (ibex-build-sbt-command dirs))
+         (test-only (ibex-build-test-only-command dirs))
          (command (concat test-only " *" (car (split-string (buffer-name) ".scala")) " -- -z \"" wildcard "\";")))
     (message command)
-    (sbt:command command)))
+    (sbt-command command)))
 
 (defun run-single-test ()
   "Run single test (based on cursor position / highlighted region)."
@@ -104,6 +104,7 @@
             (define-key map (kbd "C-c C-o") 'ensime-refactor-organize-java-imports)
             (define-key map (kbd "C-c C-t C-t") 'run-single-test)
             (define-key map (kbd "C-c C-t C-f") 'run-tests-in-file)
+            (define-key map (kbd "C-c C-t C-p") 'sbt-run-previous-command)
             map))
 
 (add-hook 'scala-mode-hook 'ibex-mode)

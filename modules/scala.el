@@ -10,7 +10,8 @@
   :hook ((scala-mode . lsp)
 ;;         (lsp-mode . lsp-lens-mode)
          (lsp-mode . lsp-enable-which-key-integration))
-  :config (setq lsp-prefer-flymake nil)
+  :config (setq lsp-prefer-flymake nil
+                lsp-ui-doc-delay 0.8)
   :init (progn (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
 ;;               (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
                )
