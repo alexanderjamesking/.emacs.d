@@ -1,0 +1,26 @@
+domain/src/it/scala/com/foo/bar/MySpec.scala
+src/test/scala/foo/bar/SomeSpec.scala
+src/it/scala/a/b/c/d/e/Hello.scala
+my-module/src/it/scala/a/b/c/d/e/Hello.scala
+/Users/alexking/bestmile/vehicle-service-other/service/src/test/scala/com/bestmile/vehicle/grpc/AlexSpec.scala
+/Users/alexking/bestmile/vehicle-service/service/src/test/scala/com/bestmile/vehicle/services/JwtServiceSpec.scala
+
+  it should \"return an InvalidSignature error if the wrong algorithm was used\" in {
+        jwtToken = JwtToken(Set(SiteID(UUID.randomUUID()))),"
+  it should \"return an InvalidSignature error if the wrong algorithm was used\" in {
+    new JwtService(\"different-signing-key\").parse(token) shouldBe Left(JwtToken.InvalidSignature)
+  it should \"return an InvalidSignature error if a different signing key was used\" in {
+    new JwtService(signingKey).parse(token) shouldBe Left(JwtToken.Expired)
+  it should \"return an Expired error for an expired token\" in {
+    new JwtService(signingKey).parse(createToken(jwtToken)) shouldBe Right(jwtToken)
+  \"JwtService\" should \"parse a valid token\" in {
+
+  it should "return an Expired error for an expired token" in
+  
+
+
+"\\([A-Za-z0-9-_\s]?+\\)/?src/\\([[:word:]]+\\)/scala/.*/\\([[:word:]]+\\).scala"
+
+
+"\"\\([[:word:]-_\s\\]+\\)\""
+

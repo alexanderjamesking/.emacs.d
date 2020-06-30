@@ -19,10 +19,10 @@
 (require 'sbt-mode)
 
 
-(defun ibex:build-test-command (s)
+(defun ibex:build-test-command (s &optional wildcard)
   "Given string S containing the filename.."
   (save-match-data
-    (and (string-match "^\\([A-Za-z0-9-_\s]?+\\)/?src/\\([[:word:]]+\\)/scala/.*/\\([[:word:]]+\\).scala" s)
+    (and (string-match "\\([A-Za-z0-9-_\s]?+\\)/?src/\\([[:word:]]+\\)/scala/.*/\\([[:word:]]+\\).scala" s)
          (let ((service (match-string 1 s))
                (test-type (match-string 2 s))
                (file-name (match-string 3 s)))
@@ -31,51 +31,32 @@
               (concat service "/" ))
             test-type
             ":testOnly *"
-            file-name)))))
+            file-name
+            (when (and wildcard (not (string= "" wildcard)))
+              (concat " -- -z \"" wildcard "\""))
+            ";")))))
 
-(ert-deftest ibex:build-test-command-test ()
-  (should (string= "domain/it:testOnly *MySpec"
-                   (ibex:build-test-command "domain/src/it/scala/com/foo/bar/MySpec.scala")))
 
-  (should (string= "test:testOnly *SomeSpec"
-                   (ibex:build-test-command "src/test/scala/foo/bar/SomeSpec.scala")))
-
-  (should (string= "it:testOnly *Hello"
-                   (ibex:build-test-command "src/it/scala/a/b/c/d/e/Hello.scala")))
-
-  (should (string= "my-module/it:testOnly *Hello"
-                   (ibex:build-test-command "my-module/src/it/scala/a/b/c/d/e/Hello.scala")))
-
-  ;; doesn't work with full filename yet
-  ;; (should (string= "my-module/it:testOnly *Hello"
-  ;;                  (ibex:build-test-command "/foo/bar/my-module/src/it/scala/a/b/c/d/e/Hello.scala")))
-  )
-
-(defun ibex-build-test-only-command (dirs &optional acc prev)
-  "Loop through DIRS to find the path, ACC and PREV are used during recursion."
-  (if dirs
-      (let* ((part (car dirs))
-             (command-string (if (and acc prev)
-                                 acc
-                               (if (string= "src" part) ;; only for the first iteration
-                                   ""
-                                 (concat part "/")))))
-
-        (if (string= "scala" part)
-            (concat command-string prev ":testOnly")
-          (ibex-build-test-only-command (cdr dirs) command-string part)))
-    acc))
-
-(defun sbt-test-wildcard (wildcard)
+(defun sbt-test-wildcard (&optional wildcard)
   "Run `testOnly *BUFFER-NAME -- -z WILDCARD`."
   (interactive "sWildcard: ")
-  
-  (let* ((file-name (s-replace (projectile-project-root) "" (buffer-file-name)))
-         (dirs (s-split "/" file-name))
-         (test-only (ibex-build-test-only-command dirs))
-         (command (concat test-only " *" (car (split-string (buffer-name) ".scala")) " -- -z \"" wildcard "\";")))
+  (let ((command (ibex:build-test-command (buffer-file-name) wildcard)))
     (message command)
     (sbt-command command)))
+
+
+(defun ibex:test-string ()
+  "Move to the beginning of the sentence and look for a string to use as the wildcard to narrow the test."
+  (interactive)
+  (save-excursion
+    (backward-sentence)
+    (let ((s (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+      (save-match-data
+        (and (string-match "\"\\([[:word:]-_\s\\]+\\)\"" s)
+             (let ((s1 (match-string 1 s))
+                   (s2 (match-string 2 s)))
+               (or s2 s1)))))))
+
 
 (defun run-single-test ()
   "Run single test (based on cursor position / highlighted region)."
@@ -83,14 +64,15 @@
   (let ((wildcard (if (use-region-p)
                       ;; use whatever is in the region - it's up to the user to get this correct
                       (buffer-substring-no-properties (mark) (point))
-                      ;; TODO: we should expand this to get the whole string up to but not including the quotes
-                    (current-word))))
+                    ;; TODO: we should expand this to get the whole string up to but not including the quotes
+                    (or (ibex:test-string) (current-word)))))
     (sbt-test-wildcard wildcard)))
 
+
 (defun run-tests-in-file ()
-  "Run all tests in the current file name."
+  "Run all tests in the current file."
   (interactive)
-  (sbt-test-wildcard ""))
+  (sbt-test-wildcard))
 
 (defun sbt-test-buffer-file-region ()
   "Run `testOnly *BUFFER-NAME -- -z REGION`."
@@ -114,6 +96,7 @@
 ;; TODO - sort imports in a region
 ;; the following is taken from https://github.com/ensime/ensime-emacs/blob/34eb11dac3ec9d1c554c2e55bf056ece6983add7/ensime-refactor.el#L46
 ;; it needs a bit of work but it'll do for a temporary solution
+
 (defun ensime-refactor-organize-java-imports ()
   "Sort all import statements lexicographically and delete the duplicate imports."
   (interactive)
@@ -130,6 +113,19 @@
       (sort-lines nil beg end)
       (delete-duplicate-lines beg end nil t))))
 
+(defun ibex-wip ()
+  "Move to the beginning of the sentence and look for a string to use as the wildcard to narrow the test."
+  (interactive)
+  (save-excursion
+    (backward-sentence)
+    (let ((s (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+      (save-match-data
+        (and (string-match "\"\\([[:word:]-_\s\\]+\\)\"" s)
+             (let ((s1 (match-string 1 s))
+                   (s2 (match-string 2 s)))
+               (message (or s2 s1))))))))
+
+;;;###autoload
 (define-minor-mode ibex-mode
   "My custom Scala mode."
   :keymap (let ((map (make-sparse-keymap)))
@@ -137,9 +133,11 @@
             (define-key map (kbd "C-c C-t C-t") 'run-single-test)
             (define-key map (kbd "C-c C-t C-f") 'run-tests-in-file)
             (define-key map (kbd "C-c C-t C-p") 'sbt-run-previous-command)
+            (define-key map (kbd "C-c C-t C-w") 'ibex-wip)
             map))
 
 (add-hook 'scala-mode-hook 'ibex-mode)
 
 (provide 'ibex)
-;;; ajk-scala.el ends here
+
+;;; ibex.el ends here
