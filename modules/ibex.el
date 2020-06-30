@@ -19,6 +19,38 @@
 (require 'sbt-mode)
 
 
+(defun ibex:build-test-command (s)
+  "Given string S containing the filename.."
+  (save-match-data
+    (and (string-match "^\\([A-Za-z0-9-_\s]?+\\)/?src/\\([[:word:]]+\\)/scala/.*/\\([[:word:]]+\\).scala" s)
+         (let ((service (match-string 1 s))
+               (test-type (match-string 2 s))
+               (file-name (match-string 3 s)))
+           (concat
+            (when (not (string= "" service))
+              (concat service "/" ))
+            test-type
+            ":testOnly *"
+            file-name)))))
+
+(ert-deftest ibex:build-test-command-test ()
+  (should (string= "domain/it:testOnly *MySpec"
+                   (ibex:build-test-command "domain/src/it/scala/com/foo/bar/MySpec.scala")))
+
+  (should (string= "test:testOnly *SomeSpec"
+                   (ibex:build-test-command "src/test/scala/foo/bar/SomeSpec.scala")))
+
+  (should (string= "it:testOnly *Hello"
+                   (ibex:build-test-command "src/it/scala/a/b/c/d/e/Hello.scala")))
+
+  (should (string= "my-module/it:testOnly *Hello"
+                   (ibex:build-test-command "my-module/src/it/scala/a/b/c/d/e/Hello.scala")))
+
+  ;; doesn't work with full filename yet
+  ;; (should (string= "my-module/it:testOnly *Hello"
+  ;;                  (ibex:build-test-command "/foo/bar/my-module/src/it/scala/a/b/c/d/e/Hello.scala")))
+  )
+
 (defun ibex-build-test-only-command (dirs &optional acc prev)
   "Loop through DIRS to find the path, ACC and PREV are used during recursion."
   (if dirs
@@ -37,7 +69,7 @@
 (defun sbt-test-wildcard (wildcard)
   "Run `testOnly *BUFFER-NAME -- -z WILDCARD`."
   (interactive "sWildcard: ")
-
+  
   (let* ((file-name (s-replace (projectile-project-root) "" (buffer-file-name)))
          (dirs (s-split "/" file-name))
          (test-only (ibex-build-test-only-command dirs))
