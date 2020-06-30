@@ -58,6 +58,12 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+;; enable narrow to region
+;; C-x n n    narrow
+;; C-x n w    widen
+;; C-x n d    narrow to function
+(put 'narrow-to-region 'disabled nil)
+
 ;; TAB => 4*'\b'
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
