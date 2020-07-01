@@ -94,12 +94,15 @@
 ;; this is the emacs default
 ;;(global-set-key (kbd "M-y") 'yank-pop)
 
-(use-package idle-highlight-mode
-  :ensure t
-  :config
-  (progn
-    ;; TODO -check this works!
-    (add-hook 'prog-mode-hook 'idle-highlight-mode)))
+;; this sometimes errors (e.g. when hovering over a hyphen if it appears too often)
+;; we have some tests that use marble diagrams so this constantly errors with
+;; Error running timer ‘idle-highlight-word-at-point’: (error "Variable binding depth exceeds max-specpdl-size")
+;; (use-package idle-highlight-mode
+;;   :ensure t
+;;   :config
+;;   (progn
+;;     ;; TODO -check this works!
+;;     (add-hook 'prog-mode-hook 'idle-highlight-mode)))
 
 
 (use-package multiple-cursors
