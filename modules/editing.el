@@ -49,6 +49,7 @@
 (use-package company-quickhelp)
 
 (use-package company
+  :diminish
   :init
   (setq company-tooltip-align-annotations t
         company-minimum-prefix-length 2
@@ -103,6 +104,7 @@
 ;;   (progn
 ;;     ;; TODO -check this works!
 ;;     (add-hook 'prog-mode-hook 'idle-highlight-mode)))
+
 
 
 (use-package multiple-cursors
@@ -169,16 +171,16 @@
          ("M-<down>" . drag-stuff-down)))
 
 
-;; disabled as it doesn't play nicely with metals which builds on save
-;; (use-package super-save
-;;   :ensure t
-;;   :init
-;;   (super-save-mode +1)
-;;   ;; save when switching buffers
-;;   (setq super-save-auto-save-when-idle t)
-;;   ;; turn off built in auto save
+(use-package super-save
+  :diminish
+  :ensure t
+  :init
+  (super-save-mode +1)
+  ;; save when switching buffers
+  (setq super-save-auto-save-when-idle t)
+  ;; turn off built in auto save
 
-;;   (setq auto-save-default nil))
+  (setq auto-save-default nil))
 
 
 

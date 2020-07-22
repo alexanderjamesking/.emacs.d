@@ -37,14 +37,27 @@
             ";")))))
 
 
+(defun ibex:project-file-name ()
+  "Relative project file-name."
+  (interactive)
+  (let ((file-name (buffer-file-name))
+        (project-root sbt:buffer-project-root))
+    (string-match "/.*/\\([A-Za-z0-9-_\s]?+\\)/" project-root)
+    (let ((project-name (match-string 1 project-root)))
+      (string-match (concat project-name "/\\(.+\\)") file-name)
+      (match-string 1 file-name))))
+
+
 (defun sbt-test-wildcard (&optional wildcard)
   "Run `testOnly *BUFFER-NAME -- -z WILDCARD`."
   (interactive "sWildcard: ")
-  (let ((command (ibex:build-test-command (buffer-file-name) wildcard)))
+  (let ((command (ibex:build-test-command (ibex:project-file-name) wildcard)))
     (message command)
     (sbt-command command)))
 
 
+;; TODO - improve this to make it handle multiple lines
+;; and do some checks to see that it actually looks like a test
 (defun ibex:test-string ()
   "Move to the beginning of the sentence and look for a string to use as the wildcard to narrow the test."
   (interactive)

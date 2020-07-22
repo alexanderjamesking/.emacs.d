@@ -2,6 +2,7 @@
 (use-package which-key
   :diminish which-key-mode
   :ensure t
+  :config (setq which-key-idle-delay 10000)
   :init (which-key-mode))
 
 (use-package lsp-mode
@@ -9,9 +10,11 @@
   ;; Optional - enable lsp-mode automatically in scala files
   :hook ((scala-mode . lsp)
 ;;         (lsp-mode . lsp-lens-mode)
-         (lsp-mode . lsp-enable-which-key-integration))
+         ;;(lsp-mode . lsp-enable-which-key-integration)
+         )
   :config (setq lsp-prefer-flymake nil
-                lsp-ui-doc-delay 0.8)
+                ;;lsp-ui-doc-delay 0.8
+                )
   :init (progn (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
 ;;               (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
                )

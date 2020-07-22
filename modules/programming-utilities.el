@@ -1,4 +1,5 @@
 (use-package magit
+  :diminish
   ;; :pin "melpa-stable"
   :config
   (setq magit-save-repository-buffers 'dontask)
