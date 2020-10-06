@@ -41,8 +41,9 @@
   "Relative project file-name."
   (interactive)
   (let ((file-name (buffer-file-name))
-        (project-root sbt:buffer-project-root))
+        (project-root (sbt:find-root)))
     (string-match "/.*/\\([A-Za-z0-9-_\s]?+\\)/" project-root)
+    (message project-root)
     (let ((project-name (match-string 1 project-root)))
       (string-match (concat project-name "/\\(.+\\)") file-name)
       (match-string 1 file-name))))
@@ -138,6 +139,17 @@
                    (s2 (match-string 2 s)))
                (message (or s2 s1))))))))
 
+
+(defun ibex-run-unit-tests ()
+  (interactive)
+  (message "running unit tests `test`")
+  (sbt-command "test"))
+
+(defun ibex-run-integration-tests ()
+  (interactive)
+  (message "running integration tests `it:test`")
+  (sbt-command "it:test"))
+
 ;;;###autoload
 (define-minor-mode ibex-mode
   "My custom Scala mode."
@@ -147,6 +159,8 @@
             (define-key map (kbd "C-c C-t C-f") 'run-tests-in-file)
             (define-key map (kbd "C-c C-t C-p") 'sbt-run-previous-command)
             (define-key map (kbd "C-c C-t C-w") 'ibex-wip)
+            (define-key map (kbd "C-c C-t C-u") 'ibex-run-unit-tests)
+            (define-key map (kbd "C-c C-t C-i") 'ibex-run-integration-tests)
             map))
 
 (add-hook 'scala-mode-hook 'ibex-mode)

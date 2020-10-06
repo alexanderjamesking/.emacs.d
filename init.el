@@ -47,6 +47,7 @@
     ;; "rust"
     "scala"
     "ibex"
+    "c"
     ))
 
 (mapc (lambda (module)

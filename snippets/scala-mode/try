@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+#Author : Alexander James King
+# name: Try
+# key: Try
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+Try($1) match {
+  case Success(${2:x}) => ${3:x}
+  case Failure(${4:f: Throwable}) => ${5:f}
+}
+`(progn
+    (message "Hello world")
+    "")`

@@ -115,11 +115,11 @@
 
 
 ;; colourise colour names in buffers
-(use-package rainbow-mode
-  :diminish
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-mode))
+;; (use-package rainbow-mode
+;;   :diminish
+;;   :ensure t
+;;   :config
+;;   (add-hook 'prog-mode-hook #'rainbow-mode))
 
 ;; a “rainbow parentheses”-like mode which highlights parens, brackets, and braces according to their depth.
 (use-package rainbow-delimiters
@@ -183,4 +183,6 @@
   (setq auto-save-default nil))
 
 
+
+(setq js-indent-level 2)
 
