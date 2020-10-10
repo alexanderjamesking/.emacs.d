@@ -2,7 +2,7 @@
 (set-face-attribute 'default nil :height 145)
 
 ;;(set-frame-font "JetBrains Mono" nil t)
-(set-frame-font "Fira Code Retina" nil t)
+;;(set-frame-font "Fira Code Medium" nil t)
 
 ;; No to weird flickering
 (set 'visible-bell nil)
@@ -12,7 +12,9 @@
 
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
-  :init (load-theme 'sanityinc-tomorrow-night t))
+  :init (load-theme 'sanityinc-tomorrow-night t)
+  ;; this font was Fira Code Retina on a mac
+  :config (set-face-attribute 'default nil :height 145 :font "Fira Code Medium"))
 
 ;; (custom-set-variables
 ;;  '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
