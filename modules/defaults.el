@@ -159,4 +159,8 @@
 
 (global-set-key (kbd "C-c C-m") 'switch-to-minibuffer)
 
+;; turn off keybinding for suspend-frame (removes bindings for both C-z and C-c C-z)
+(global-unset-key (kbd "C-z")) 
+;;(global-set-key (kbd "C-c C-z") 'suspend-frame)
+
 ;;
