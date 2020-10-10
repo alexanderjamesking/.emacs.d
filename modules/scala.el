@@ -1,8 +1,10 @@
-
+;; this shouldn't be in scala.el - perhaps editing
 (use-package which-key
   :diminish which-key-mode
   :ensure t
-  :config (setq which-key-idle-delay 10000)
+  :config (setq which-key-show-early-on-C-h t
+                which-key-idle-delay 10000
+                which-key-idle-secondary-delay 0.05)
   :init (which-key-mode))
 
 (use-package lsp-mode
