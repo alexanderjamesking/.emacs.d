@@ -18,3 +18,12 @@
   (setq browse-url-generic-program
         "/Applications/Firefox.app/Contents/MacOS/firefox"))
 ;; end OS X
+
+
+
+(when (eq system-type 'gnu/linux)
+
+  ;; todo linux settings
+
+  
+  )
