@@ -6,14 +6,13 @@
     :config
     (setq exec-path-from-shell-check-startup-files nil)
     ;;(exec-path-from-shell-copy-env "PATH")
-    (exec-path-from-shell-initialize)
-    )
-
+    (exec-path-from-shell-initialize))
 
 ;;  (add-to-list 'exec-path "/usr/local/bin" t)
 
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier nil)
+  ;; commented out since switching keyboards - use alt, instead of cmd
+  ;; (setq mac-command-modifier 'meta)
+  ;;  (setq mac-option-modifier nil)
 
   (setq browse-url-generic-program
         "/Applications/Firefox.app/Contents/MacOS/firefox"))
@@ -25,5 +24,4 @@
 
   ;; todo linux settings
 
-  
   )

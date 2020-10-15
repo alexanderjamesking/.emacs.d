@@ -12,7 +12,7 @@
   ;; Optional - enable lsp-mode automatically in scala files
   :hook ((scala-mode . lsp)
 ;;         (lsp-mode . lsp-lens-mode)
-         ;;(lsp-mode . lsp-enable-which-key-integration)
+         (lsp-mode . lsp-enable-which-key-integration)
          )
   :config (setq lsp-prefer-flymake nil
                 ;;lsp-ui-doc-delay 0.8
