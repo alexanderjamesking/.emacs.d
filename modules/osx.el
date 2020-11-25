@@ -5,7 +5,7 @@
     :ensure t
     :config
     (setq exec-path-from-shell-check-startup-files nil)
-    ;;(exec-path-from-shell-copy-env "PATH")
+    (exec-path-from-shell-copy-env "PATH")
     (exec-path-from-shell-initialize))
 
 ;;  (add-to-list 'exec-path "/usr/local/bin" t)

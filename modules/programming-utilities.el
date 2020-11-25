@@ -10,19 +10,6 @@
 (use-package restclient
   :mode ("\\.http$". restclient-mode))
 
-
 ;; (use-package gist)
 
 
-;; (use-package docker)
-
-;; https://www.emacswiki.org/emacs/MultiTerm
-
-(use-package multi-term
-  :ensure t
-  :bind (("C-c C-j" . term-line-mode)
-         ("C-c C-k" . term-col-mode))
-  :config
-  (setq multi-term-program "/bin/zsh"))
-
-  

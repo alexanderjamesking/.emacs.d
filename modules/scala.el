@@ -13,7 +13,7 @@
   :hook ((scala-mode . lsp)
 ;;         (lsp-mode . lsp-lens-mode)
          (lsp-mode . lsp-enable-which-key-integration)
-         )
+         (go-mode . lsp-deferred))
   :config (setq lsp-prefer-flymake nil
                 ;;lsp-ui-doc-delay 0.8
                 )
@@ -23,6 +23,16 @@
   ;; but this does: (I eval'd it inline, need to add it here properly)
 ;; (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
   )
+
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+(lsp-register-custom-settings
+ '(("gopls.completeUnimported" t t)
+   ("gopls.staticcheck" t t)))
 
 
 ;; https://github.com/emacs-lsp/lsp-metals
