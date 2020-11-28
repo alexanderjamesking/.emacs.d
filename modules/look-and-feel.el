@@ -37,3 +37,12 @@
 ;;   (load-theme 'doom-nord t))
 
 
+;; apply colours to comint buffers (e.g. for dap-mode test output / projectile run command C-p u ...)
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region compilation-filter-start (point))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+
