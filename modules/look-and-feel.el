@@ -3,7 +3,7 @@
 
 ;;(set-face-attribute 'default nil :height 130  :font "Fira Code Retina")
 
-(set-face-attribute 'default nil :height 145  :font "Fira Code Retina")
+;;(set-face-attribute 'default nil :height 145  :font "Fira Code Retina")
 
 ;;(set-frame-font "JetBrains Mono" nil t)
 ;;(set-frame-font "Fira Code Medium" nil t)
@@ -18,11 +18,13 @@
   :ensure t
   :init (load-theme 'sanityinc-tomorrow-night t)
   ;; this font was Fira Code Retina on a mac
-<<<<<<< HEAD
-  :config (set-face-attribute 'default nil :height 130 :font "Fira Code Retina")) ;; Medium 145
-=======
-  :config (set-face-attribute 'default nil :height 145 :font "Fira Code Retina")) ;; Medium 145
->>>>>>> 46e2344 (tmp)
+
+;;  :config (set-face-attribute 'default nil :height 130 :font "Fira Code Retina")) ;; Medium 145
+
+  :config (set-face-attribute 'default nil :height 145 :font "Fira Code")
+
+  ) ;; Medium 145
+
 
 ;; (custom-set-variables
 ;;  '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
