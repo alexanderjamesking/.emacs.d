@@ -26,3 +26,6 @@ cider-history
 savehist
 eshell/
 .dap-breakpoints
+.cache/
+eclipse.jdt.ls/
+workspace/
