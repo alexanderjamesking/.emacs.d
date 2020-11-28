@@ -1,28 +1,47 @@
 ;; this shouldn't be in scala.el - perhaps editing
 (use-package which-key
   :diminish which-key-mode
-  :ensure t
+n  :ensure t
   :config (setq which-key-show-early-on-C-h t
                 which-key-idle-delay 10000
                 which-key-idle-secondary-delay 0.05)
   :init (which-key-mode))
 
+(defface ajk/lsp-ui-sideline-code-action
+  '((default :foreground "#de935f") ;; use tomorrow-night orange instead of "yellow"
+    (((background light)) :foreground "DarkOrange"))
+  "Face used to highlight code action text."
+  :group 'lsp-ui-sideline)
+
+(defun ajk/lsp-ui-sideline-code-action-remap ()
+  (face-remap-add-relative 'lsp-ui-sideline-code-action 'ajk/lsp-ui-sideline-code-action))
+
 (use-package lsp-mode
   :ensure t
   ;; Optional - enable lsp-mode automatically in scala files
   :hook ((scala-mode . lsp)
-;;         (lsp-mode . lsp-lens-mode)
+         (lsp-mode . lsp-lens-mode)
          (lsp-mode . lsp-enable-which-key-integration)
-         (go-mode . lsp-deferred))
+         (go-mode . lsp-deferred)
+         (java-mode . lsp))
   :config (setq lsp-prefer-flymake nil
+                read-process-output-max (* 1024 1024) ;; 1mb
+;;                lsp-ui-doc-delay 2
                 ;;lsp-ui-doc-delay 0.8
                 )
   :init (progn (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
-;;               (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+               (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+               (ajk/lsp-ui-sideline-code-action-remap)
+
+;;               (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
                )
   ;; but this does: (I eval'd it inline, need to add it here properly)
 ;; (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
   )
+
+
+
+
 
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
@@ -35,19 +54,34 @@
    ("gopls.staticcheck" t t)))
 
 
+
+(use-package lsp-sonarlint
+  :ensure t
+  :config (setq lsp-sonarlint-java-enabled t))
+
+
+
+(use-package lsp-java
+  :ensure t
+  :config (setq lsp-sonarlint-java-enabled t
+                lsp-java-java-path "/Library/Java/JavaVirtualMachines/jdk-11.0.7.jdk/Contents/Home/bin/java")
+  :init (require 'lsp-sonarlint-java)
+  :bind (("C-c C-j t" . dap-java-run-test-method)
+         ("C-c C-j d" . dap-java-debug-test-method)
+         ("C-c C-j f" . dap-java-run-test-class)
+         ("C-c C-j c" . dap-continue)
+         ("C-c C-j b" . dap-breakpoint-toggle)))
+
 ;; https://github.com/emacs-lsp/lsp-metals
-
-(use-package lsp-metals :ensure t)
-
 ;; I couldn't get lsp-metals from melpa for some reason
 ;; (straight-use-package
 ;;  '(lsp-metals :type git
 ;;               :host github
 ;;               :repo "emacs-lsp/lsp-metals"))
 
-
-
-
+(use-package lsp-metals
+  :ensure t
+  :config (setq lsp-metals-treeview-show-when-views-received nil))
 
 ;; (use-package lsp-scala
 ;; ;;  :load-path "~/path/to/lsp-scala"
@@ -88,14 +122,12 @@
 (use-package company-lsp)
 
 ;; Use the Debug Adapter Protocol for running tests and debugging
-;; (use-package posframe
-;;   ;; Posframe is a pop-up tool that must be manually installed for dap-mode
-;;   )
-;; (use-package dap-mode
-;;   :hook
-;;   (lsp-mode . dap-mode)
-;;   (lsp-mode . dap-ui-mode))
-
+  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+(use-package posframe)
+(use-package dap-mode
+  :hook
+  (lsp-mode . dap-mode)
+  (lsp-mode . dap-ui-mode))
 
 
 ;; (use-package ajk-scala
