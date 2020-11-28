@@ -16,6 +16,15 @@
 
   (setq browse-url-generic-program
         "/Applications/Firefox.app/Contents/MacOS/firefox"))
+
+
+  ;; unset ns-popup-font-panel as I hit this occasionally by accident
+  ;; due to multiple layers on the keyboard
+  (global-unset-key (kbd "s-t"))
+
+
+
+
 ;; end OS X
 
 
