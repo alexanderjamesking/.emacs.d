@@ -17,7 +17,7 @@
 (use-package whitespace
   :diminish global-whitespace-mode
   :init
-  (global-whitespace-mode 1)
+  (global-whitespace-mode 0)
   ;; (dolist (hook '(prog-mode-hook text-mode-hook))
   ;;   (add-hook hook #'whitespace-mode))
   (add-hook 'before-save-hook 'delete-trailing-whitespace)

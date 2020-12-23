@@ -1,7 +1,7 @@
 ;; this shouldn't be in scala.el - perhaps editing
 (use-package which-key
   :diminish which-key-mode
-n  :ensure t
+  :ensure t
   :config (setq which-key-show-early-on-C-h t
                 which-key-idle-delay 10000
                 which-key-idle-secondary-delay 0.05)
@@ -28,11 +28,17 @@ n  :ensure t
                 read-process-output-max (* 1024 1024) ;; 1mb
 ;;                lsp-ui-doc-delay 2
                 ;;lsp-ui-doc-delay 0.8
+                lsp-sonarlint-scala-enabled nil
+
                 )
   :init (progn (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
                (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
                (ajk/lsp-ui-sideline-code-action-remap)
 
+;;                (setq lsp-sonarlint-modes-enabled (delete 'scala-mode lsp-sonarlint-modes-enabled))
+
+               
+               
 ;;               (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
                )
   ;; but this does: (I eval'd it inline, need to add it here properly)
@@ -57,20 +63,30 @@ n  :ensure t
 
 (use-package lsp-sonarlint
   :ensure t
-  :config (setq lsp-sonarlint-java-enabled t))
+  :config (setq lsp-sonarlint-java-enabled t)
+  :init (setq lsp-sonarlint-modes-enabled (delete 'scala-mode lsp-sonarlint-modes-enabled)))
 
+;;                lsp-java-java-path "/Library/Java/JavaVirtualMachines/jdk-11.0.7.jdk/Contents/Home/bin/java"
+;;                lsp-java-java-path "/Users/alexking/.sdkman/candidates/java/15.0.1-open/bin/java"
+;;                lsp-java-vmargs (list "-noverify" "--enable-preview")
 
 
 (use-package lsp-java
   :ensure t
   :config (setq lsp-sonarlint-java-enabled t
-                lsp-java-java-path "/Library/Java/JavaVirtualMachines/jdk-11.0.7.jdk/Contents/Home/bin/java")
+                c-basic-offset 2
+                tab-width 2)
   :init (require 'lsp-sonarlint-java)
   :bind (("C-c C-j t" . dap-java-run-test-method)
          ("C-c C-j d" . dap-java-debug-test-method)
-         ("C-c C-j f" . dap-java-run-test-class)
+         ("C-c C-j p" . dap-debug-last)
+         ("C-c C-j f" . dap-java-debug-test-class)
          ("C-c C-j c" . dap-continue)
          ("C-c C-j b" . dap-breakpoint-toggle)))
+
+(add-hook 'java-mode-hook (lambda ()
+                            (setq c-basic-offset 2
+                                  tab-width 2)))
 
 ;; https://github.com/emacs-lsp/lsp-metals
 ;; I couldn't get lsp-metals from melpa for some reason
@@ -124,7 +140,10 @@ n  :ensure t
 ;; Use the Debug Adapter Protocol for running tests and debugging
   ;; Posframe is a pop-up tool that must be manually installed for dap-mode
 (use-package posframe)
+
+;;  :config (setq dap-java-java-command "/Users/alexking/.sdkman/candidates/java/15.0.1-open/bin/java")
 (use-package dap-mode
+   :ensure t
   :hook
   (lsp-mode . dap-mode)
   (lsp-mode . dap-ui-mode))
