@@ -1,5 +1,7 @@
 ;;; init.el --- My emacs config
 
+(setq byte-compile-warnings '(cl-functions))
+
 ;;; Packages via straight.el
 ;; https://github.com/raxod502/straight.el
 (setq straight-use-package-by-default t
@@ -48,6 +50,7 @@
     "scala"
     "ibex"
     "c"
+    "terminal"
     ))
 
 (mapc (lambda (module)

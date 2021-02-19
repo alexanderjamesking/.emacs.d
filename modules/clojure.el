@@ -2,6 +2,9 @@
 ;; commenting out a clojure form - this should NOT be global
 (global-set-key (kbd "C-c C-/") '(lambda () (interactive) (insert "#_")))
 
+(use-package flycheck-clj-kondo
+  :ensure t)
+
 (use-package clojure-mode
   :ensure t
   :mode (("\\.clj\\'" . clojure-mode)
@@ -26,6 +29,7 @@
     (with-gen 0)
     (fmap 0)
     (d/chain 0))
+  (require 'flycheck-clj-kondo)
 ;;  (setq cider-default-cljs-repl 'figwheel)
 ;;  (setq cider-jack-in-lein-plugins '(("cider/cider-nrepl" "0.22.0-beta9")) )
   )

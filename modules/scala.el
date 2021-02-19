@@ -28,25 +28,16 @@
                 read-process-output-max (* 1024 1024) ;; 1mb
 ;;                lsp-ui-doc-delay 2
                 ;;lsp-ui-doc-delay 0.8
-                lsp-sonarlint-scala-enabled nil
 
                 )
   :init (progn (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
                (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
                (ajk/lsp-ui-sideline-code-action-remap)
-
-;;                (setq lsp-sonarlint-modes-enabled (delete 'scala-mode lsp-sonarlint-modes-enabled))
-
-               
-               
 ;;               (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
                )
   ;; but this does: (I eval'd it inline, need to add it here properly)
 ;; (define-key lsp-mode-map (kbd "C-c C-p") lsp-command-map)
   )
-
-
-
 
 
 (defun lsp-go-install-save-hooks ()
@@ -59,24 +50,10 @@
  '(("gopls.completeUnimported" t t)
    ("gopls.staticcheck" t t)))
 
-
-
-(use-package lsp-sonarlint
-  :ensure t
-  :config (setq lsp-sonarlint-java-enabled t)
-  :init (setq lsp-sonarlint-modes-enabled (delete 'scala-mode lsp-sonarlint-modes-enabled)))
-
-;;                lsp-java-java-path "/Library/Java/JavaVirtualMachines/jdk-11.0.7.jdk/Contents/Home/bin/java"
-;;                lsp-java-java-path "/Users/alexking/.sdkman/candidates/java/15.0.1-open/bin/java"
-;;                lsp-java-vmargs (list "-noverify" "--enable-preview")
-
-
 (use-package lsp-java
   :ensure t
-  :config (setq lsp-sonarlint-java-enabled t
-                c-basic-offset 2
+  :config (setq c-basic-offset 2
                 tab-width 2)
-  :init (require 'lsp-sonarlint-java)
   :bind (("C-c C-j t" . dap-java-run-test-method)
          ("C-c C-j d" . dap-java-debug-test-method)
          ("C-c C-j p" . dap-debug-last)
