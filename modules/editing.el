@@ -148,7 +148,9 @@
   (add-hook 'text-mode-hook #'flyspell-mode)
   (add-hook 'prog-mode-hook #'flyspell-prog-mode)
   :bind (:map flyspell-mode-map
-              ("C-;" . comment-or-uncomment-region)))
+              ("C-;" . comment-or-uncomment-region)
+              ;; remove auto correct keybinding - used for avy-goto-char-2 instead
+              ("C-." . nil)))
 
 ;; from writing gnu emacs extensions book
 (defun other-window-backward (&optional n)
