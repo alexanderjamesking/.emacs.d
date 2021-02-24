@@ -57,5 +57,13 @@
   :ensure t
   :bind ("C-c C-f" . fzf-projectile))
 
+
+;; bookmarks
+(use-package bm
+  :ensure t
+  :bind (("C-c C-b C-m" . bm-toggle)
+         ("C-c C-b C-p" . bm-previous)
+         ("C-c C-b C-n" . bm-next)))
+
 ;;
 
