@@ -4,7 +4,7 @@
   :config
   (setq magit-save-repository-buffers 'dontask)
   :bind (("C-x g" . magit-status)
-         ("C-c C-g" . magit-status)))
+         ("C-c C-g C-l" . magit-log-all)))
 
 
 (use-package restclient
