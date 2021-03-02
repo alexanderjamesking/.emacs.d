@@ -46,3 +46,12 @@
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 
+
+;; increase size of name column in ibuffer
+(setq ibuffer-formats 
+      '((mark modified read-only locked " " 
+              (name 42 42 :left :elide) " "
+              (size 9 -1 :right) " "
+              (mode 16 16 :left :elide) " "
+              filename-and-process)
+        (mark " " (name 16 -1) " " filename)))
