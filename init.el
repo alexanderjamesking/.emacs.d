@@ -47,8 +47,8 @@
     "clojure"
     "go"
     ;; "rust"
-    "scala"
-    "ibex"
+;;    "scala"
+;;    "ibex"
     "c"
     "terminal"
     ))

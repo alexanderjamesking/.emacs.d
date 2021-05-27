@@ -11,8 +11,8 @@
 ;;  (add-to-list 'exec-path "/usr/local/bin" t)
 
   ;; commented out since switching keyboards - use alt, instead of cmd
-  ;; (setq mac-command-modifier 'meta)
-  ;;  (setq mac-option-modifier nil)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier nil)
 
   (setq browse-url-generic-program
         "/Applications/Firefox.app/Contents/MacOS/firefox"))
